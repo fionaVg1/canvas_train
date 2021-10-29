@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>背景色渐变</title>
+  <style>
+    #block{
+      width: 400px;
+      height: 400px;
+      margin: 0 auto;
+      background-color: #69c;
+      transition: background-color 2s linear;
+    }
+    #block:hover{
+      background-color: #aa6;
+    }
+    #block2 {
+      width: 400px;
+      height: 50px;
+      background-color: green;
+      transition: width 3s linear;
+    }
+    #block2:hover{
+      width: 960px;
+    }
+  </style>
+</head>
+<body>
+  <div id="block"></div>
+  <div id="block2"></div>
+</body>
+</html>
