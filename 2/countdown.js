@@ -5,7 +5,8 @@ let MARGIN_TOP = 60;
 let MARGIN_LEFT = 30;
 
 
-const endTime = new Date(2021,10,2,15,50,52);
+const endTime = new Date();
+endTime.setTime(endTime.getTime()+7600*1000);
 var curShowTimeSeconds = 0
 var balls = [];
 const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"];
@@ -75,6 +76,16 @@ function updateBalls(){
             balls[i].y = WINDOW_HEIGHT-RADIUS;
             balls[i].vy = - balls[i].vy*0.75;
         }
+    }
+    //删除越过边界的小球
+    let cnt = 0;
+    for(var i = 0;i<balls.length;i++){
+      if(balls[i].x+RADIUS>0 && balls[i].x-RADIUS<WINDOW_WIDTH){
+        balls[cnt] = balls[i]
+      }
+    }
+    while(balls.length>cnt){
+      balls.pop();
     }
 }
 
