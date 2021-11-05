@@ -17,31 +17,29 @@
       canvas.width = 800;
       canvas.height = 800;
       let context = canvas.getContext('2d');     
-      this.drawRect(context,100,100,400,400,10,'#058','red');
-      this.drawRect2(context,300,300,400,400,10,'#058','rgba(0,256,2,0.5');
+      context.fillStyle = "black";
+      context.fillRect(0,0,canvas.width,canvas.height);
+      for(let i=0;i<200;i++){
+        let r = Math.random()*10+10;
+        let x = Math.random()*canvas.width;
+        let y = Math.random()*canvas.height;
+        let a = Math.random()*360;
+        this.drawStar(context,r,r/2,x,y,a);
+      }
     }
-
-    function drawRect(cxt,x,y,width,height,borderWidth,borderColor,fillColor){
+    function drawStar(cxt,r,R,x,y,rot){
       cxt.beginPath();
-      // cxt.moveTo(x,y);
-      // cxt.lineTo(x+width,y);
-      // cxt.lineTo(x+width,y+height);
-      // cxt.lineTo(x,y+height);
-      cxt.rect(x,y,width,height);
+      for(var i=0;i<5;i++){
+         cxt.lineTo(Math.cos((18+i*72-rot)/180*Math.PI)*R+x,-Math.sin((18+i*72-rot)/180*Math.PI)*R+y);
+         cxt.lineTo(Math.cos((54+i*72-rot)/180*Math.PI)*r+x,-Math.sin((54+i*72-rot)/180*Math.PI)*r+y)
+      }
       cxt.closePath();
-      cxt.lineWidth = borderWidth;
-      cxt.fillStyle = fillColor;
-      cxt.strokeStyle = borderColor;
+      cxt.fillStyle = "#fb3";
+      cxt.strokeStyle = "#fd5";
+      cxt.lineJonin = "round";
+      //通常先填充再描边
       cxt.fill();
       cxt.stroke();
-    }
-
-    function drawRect2(cxt,x,y,width,height,borderWidth,borderColor,fillColor){
-      cxt.lineWidth = borderWidth;
-      cxt.fillStyle = fillColor;
-      cxt.strokeStyle = borderColor;
-      cxt.fillRect(x,y,width,height);
-      cxt.strokeRect(x,y,width,height);
     }
   </script>
 </body>
