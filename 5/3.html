@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="canvas" style="border: 1px solid #aaa;display: block;margin: 50px auto;">
+    当前浏览器不支持Canvas，请更换浏览器后再试
+  </canvas>
+  <script>
+    window.onload = function(){
+      let canvas = document.getElementById('canvas');
+      canvas.width = 1024;
+      canvas.height = 768;
+      let context = canvas.getContext('2d');
+      context.fillStyle = "#058";
+      context.font = 'bold 40px sans-serif';
+      
+      context.textBaseline = "top";
+      context.fillText('欢迎大家来学习啊',40,100);
+      drawBaseline(context,100)
+      
+      context.textBaseline = "middle";
+      context.fillText('欢迎大家来学习canvas啊',40,200);
+      drawBaseline(context,200)
+
+      context.textBaseline = "bottom";
+      context.fillText("欢迎大家学习Canvas绘图接口详解！",40,300);
+      drawBaseline(context,300)
+    }
+
+    function drawBaseline(cxt,h){
+      let width = cxt.canvas.width;
+      cxt.save();
+      cxt.strokeStyle = "#888";
+      cxt.lineWidth = 2;
+      cxt.moveTo(0,h);
+      cxt.lineTo(width,h);
+      cxt.stroke();
+      cxt.restore();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="canvas" style="border: 1px solid #aaa;display: block;margin: 50px auto;">
+    当前浏览器不支持Canvas，请更换浏览器后再试
+  </canvas>
+  <script>
+    window.onload = function(){
+      let canvas = document.getElementById('canvas');
+      canvas.width = 1024;
+      canvas.height = 768;
+      let context = canvas.getContext('2d');
+      context.font = 'bold 40px Arial';
+      context.fillStyle = "#058";
+      context.fillText('欢迎大家来学习',40,100);
+      context.lineWidth = 1;
+      context.strokeStyle = '#058';
+      context.strokeText('欢迎大家来学习',40,200);
+      context.fillText('欢迎大家来学习',40,300,200);//当长度不够时会被压缩
+      context.strokeText('欢迎大家来学些',40,400,200);
+      let linearGrad = context.createLinearGradient(0,0,800,0);
+      linearGrad.addColorStop(0.0,'red');
+      linearGrad.addColorStop(0.25,'orange');
+      linearGrad.addColorStop(0.5,'yellow');
+      linearGrad.addColorStop(0.75,'green');
+      linearGrad.addColorStop(1.0,'purple');
+      context.fillStyle = linearGrad;
+      context.fillText('欢迎大家来学习',40,500);
+
+      let backgroundImage = new Image();
+      backgroundImage.src = '../3/back.png';
+      backgroundImage.onload = function(){
+        let pattern = context.createPattern(backgroundImage,'repeat');
+        context.fillStyle = pattern;
+        context.font = 'bold 100px Arial';
+        context.fillText('Canvas',40,650);
+      }
+    }
+  </script>
+</body>
+</html>

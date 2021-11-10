@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="canvas" style="border: 1px solid #aaa;display: block;margin: 50px auto;">
+    当前浏览器不支持Canvas，请更换浏览器后再试
+  </canvas>
+  <script>
+    let canvas = document.getElementById('canvas');
+    let context = canvas.getContext('2d');
+    let balls = [];
+    window.onload = function(){
+      canvas.width = 800;
+      canvas.height = 800;
+      context.fillStyle = "#058";
+      for(let i=0;i<10;i++){
+        let aBall = {
+          x:Math.random()*canvas.width,
+          y:Math.random()*canvas.height,
+          r:Math.random()*50+20
+        };
+        balls[i] = aBall;
+      }
+      draw();
+      canvas.addEventListener("mousemove",detect);      
+    }  
+    function draw(x,y){
+      context.clearRect(0,0,canvas.width,canvas.height);
+      for(let i=0;i<balls.length;i++){
+        context.beginPath();
+        context.arc(balls[i].x,balls[i].y,balls[i].r,0,Math.PI*2);
+        if(context.isPointInPath(x,y)){
+          context.fillStyle = "red";
+        }else{
+          context.fillStyle = "#058";
+        }
+        context.fill();
+      }
+    }  
+    function detect(event){
+      var x = event.clientX-canvas.getBoundingClientRect().left;
+      let y = event.clientY-canvas.getBoundingClientRect().top;
+      console.log(x,y)
+      draw(x,y);
+    }
+  </script>
+</body>
+</html>
