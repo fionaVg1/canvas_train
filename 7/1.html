@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="canvas-wrapper">
+    <canvas id="canvas" style="border: 1px solid #aaa;display: block;margin: 50px auto;">
+      当前浏览器不支持Canvas，请更换浏览器后再试
+    </canvas>
+    <div id="controller">
+      <h1>Canvas绘图之旅</h1>
+      <a href="#" id="canvas-btn">停止运动</a>
+      <a href="#" class="color-btn" id="white-color-btn">&nbsp;</a>
+      <a href="#" class="color-btn" id="black-color-btn">&nbsp;</a>
+    </div>
+  </div>
+  <script>
+    let canvas = document.getElementById('canvas');
+    let context = canvas.getContext('2d');
+    CanvasRenderingContext2D.prototype.draw = function(){
+      this.fillStyle = "#058";
+      this.shadowColor = "green";
+      this.shadowOffsetX = 20;
+      this.shadowOffsetY = 20;
+      this.shadowBlur = 5;
+      this.fillRect(200,200,400,400);
+    }
+    window.onload = function(){
+      canvas.width = 800;
+      canvas.height = 800;
+      context.draw();         
+    }    
+  </script>
+</body>
+</html>
