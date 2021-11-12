@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" style="border: 1px solid #aaa;display: block;margin: 50px auto;">
+      当前浏览器不支持Canvas，请更换浏览器后再试
+    </canvas> 
+    <canvas id="offCanvas" style="display: none;"></canvas>    
+  <script>
+    //防止图片被盗用，采用离屏canvas技术,给图片加水印
+    let canvas = document.getElementById('canvas');
+    let context = canvas.getContext('2d');    
+
+    let offCanvas = document.getElementById('offCanvas');
+    let offContext = offCanvas.getContext('2d');  
+
+    let image = new Image();
+    let isMouseDown = false;    
+   
+    window.onload = function(){
+      canvas.width = 744;
+      canvas.height = 495;     
+      image.src = '../4.jpg';
+      image.onload = function(){
+        offCanvas.width = image.width;
+        offCanvas.height = image.height;
+        context.drawImage(image,0,0,canvas,width,canvas.height);
+        offContext.drawImage(image,0,0,offCanvas.width,offCanvas.height);
+      }       
+    } 
+    canvas.onmousedown = function(e){
+      e.preventDefault();
+      let {x,y} = pointWindowToCanvas(e.clientX,e.clientY);
+      isMouseDown = true;
+    }
+    canvas.onmousemove = function(e){
+      e.preventDefault();
+      if(isMouseDown){
+        let {x,y} = pointWindowToCanvas(e.clientX,e.clientY);
+      }
+    }
+     canvas.onmouseup = function(e){
+      e.preventDefault();
+      isMouseDown = false;
+    }
+     canvas.onmouseout = function(e){
+      e.preventDefault();
+      isMouseDown = false;
+    }
+    //屏幕上的坐标值转换为canvas上的坐标值
+    function pointWindowToCanvas(x,y){
+      let bbox = canvas.getBoundingClientRect();
+      return {x:x-bbox.left,y:y-bbox.top}
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" style="border: 1px solid #aaa;display: block;margin: 50px auto;">
+      当前浏览器不支持Canvas，请更换浏览器后再试
+    </canvas>   
+    <input type="range" id="scaleRange" min="0.5" max="3.0" step="0.01" value="1.0" style="display: block;margin: 20px auto;width: 600px;"/>
+    <canvas id="watermarkCanvas" style="display: none;margin: 0 auto;border: 1px solid #aaa;">
+      您的浏览器不支持canvas
+    </canvas>
+  <script>
+    //防止图片被盗用，采用离屏canvas技术,给图片加水印
+    let canvas = document.getElementById('canvas');
+    let context = canvas.getContext('2d');
+    let slider = document.getElementById('scaleRange');
+    let image = new Image();
+
+    let watermarkCanvas = document.getElementById('watermarkCanvas');
+    let watermarkcontext = watermarkCanvas.getContext('2d');
+    CanvasRenderingContext2D.prototype.drawImageByScale = function(scale){
+      let imageWidth = canvas.width*scale;
+      let imageHeight = canvas.height*scale;     
+      let dx = canvas.width/2-imageWidth/2;
+      let dy = canvas.height/2-imageHeight/2;
+      this.clearRect(0,0,canvas.width,canvas.height);
+      this.drawImage(image,dx,dy,imageWidth,imageHeight);
+      //绘制水印
+      this.drawImage(watermarkCanvas,canvas.width-watermarkCanvas.width,canvas.height-watermarkCanvas.height);     
+    }
+    window.onload = function(){
+      canvas.width = 744;
+      canvas.height = 495;
+      let scale = slider.value;
+      image.src = '../4.jpg';
+      image.onload = function(){
+        context.drawImageByScale(scale);
+        slider.onmousemove = function(){
+          scale = slider.value;
+          context.drawImageByScale(scale);
+        }
+      }
+      //setup watermark canvas
+      watermarkCanvas.width = 600;
+      watermarkCanvas.height = 100;
+      watermarkcontext.font = "bold 50px Arial";
+      watermarkcontext.fillStyle = "rgba(0,0,0,0.5)";
+      watermarkcontext.textBaseline = "middle";
+      watermarkcontext.fillText("==fiona authorize==",20,50);      
+    }    
+  </script>
+</body>
+</html>
