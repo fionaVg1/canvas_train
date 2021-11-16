@@ -20,42 +20,71 @@
     let offContext = offCanvas.getContext('2d');  
 
     let image = new Image();
-    let isMouseDown = false;    
+    let isMouseDown = false; 
+    let scale; 
    
     window.onload = function(){
-      canvas.width = 744;
-      canvas.height = 495;     
+      canvas.width = 372;
+      canvas.height = 248;     
       image.src = '../4.jpg';
       image.onload = function(){
         offCanvas.width = image.width;
         offCanvas.height = image.height;
-        context.drawImage(image,0,0,canvas,width,canvas.height);
-        offContext.drawImage(image,0,0,offCanvas.width,offCanvas.height);
+        scale = offCanvas.width/canvas.width;
+        context.drawImage(image,0,0,canvas.width,canvas.height);
+        offContext.drawImage(image,0,0);
       }       
     } 
     canvas.onmousedown = function(e){
       e.preventDefault();
-      let {x,y} = pointWindowToCanvas(e.clientX,e.clientY);
+      let point = pointWindowToCanvas(e.clientX,e.clientY);
       isMouseDown = true;
+      drawCanvasWithMagnifier(true,point)
     }
     canvas.onmousemove = function(e){
       e.preventDefault();
       if(isMouseDown){
-        let {x,y} = pointWindowToCanvas(e.clientX,e.clientY);
+        let point = pointWindowToCanvas(e.clientX,e.clientY);
+        drawCanvasWithMagnifier(true,point)
       }
     }
      canvas.onmouseup = function(e){
       e.preventDefault();
       isMouseDown = false;
+      drawCanvasWithMagnifier(false)
     }
      canvas.onmouseout = function(e){
       e.preventDefault();
       isMouseDown = false;
+      drawCanvasWithMagnifier(false)
     }
     //屏幕上的坐标值转换为canvas上的坐标值
     function pointWindowToCanvas(x,y){
       let bbox = canvas.getBoundingClientRect();
       return {x:x-bbox.left,y:y-bbox.top}
+    }
+
+    //是否绘制放大镜
+    function drawCanvasWithMagnifier(isShowMagnifier,point){
+      context.clearRect(0,0,canvas.width,canvas.height);
+      context.drawImage(image,0,0,canvas.width,canvas.height);
+      if(isShowMagnifier){
+        drawMagnifier(point)
+      }
+    }
+    function drawMagnifier(point){
+      let imageLG_cx = point.x * scale;
+      let imageLG_cy = point.y * scale;
+
+      let mr = 200;
+
+      let sx = imageLG_cx-mr;
+      let sy = imageLG_cy-mr;
+
+      let dx = point.x-mr;
+      let dy = point.y-mr;
+
+      context.drawImage(offCanvas,sx,sy,2*mr,2*mr,dx,dy,2*mr,2*mr);
     }
   </script>
 </body>
