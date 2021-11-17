@@ -24,9 +24,9 @@
     let scale; 
    
     window.onload = function(){
-      canvas.width = 372;
-      canvas.height = 248;     
-      image.src = '../4.jpg';
+      canvas.width = 1152;
+      canvas.height = 768;     
+      image.src = '../img-lg.jpg';
       image.onload = function(){
         offCanvas.width = image.width;
         offCanvas.height = image.height;
@@ -83,8 +83,15 @@
 
       let dx = point.x-mr;
       let dy = point.y-mr;
-
+      context.save();
+      context.lineWidth = 10;
+      context.strokeStyle = "#069";
+      context.beginPath();
+      context.arc(point.x,point.y,mr,0,Math.PI*2);
+      context.stroke();
+      context.clip();
       context.drawImage(offCanvas,sx,sy,2*mr,2*mr,dx,dy,2*mr,2*mr);
+      context.restore();
     }
   </script>
 </body>
