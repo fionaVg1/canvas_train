@@ -39,11 +39,21 @@
             let imageData = contexta.getImageData(0,0,canvasa.width,canvasa.height);
             //图形像素进行操作
             let pixelData = imageData.data;
-            //像素级的操作将图形变为黑色
+            //像素级的操作将图形变为黑白
             for(let i=0;i<canvasb.width*canvasb.height;i++){
-                pixelData[4*i+0] = 0;
-                pixelData[4*i+1] = 0;
-                pixelData[4*i+2] = 0;
+                let r = pixelData[4*i+0];
+                let g = pixelData[4*i+1];
+                let b = pixelData[4*i+2];
+                let grey = r*0.3 + g*0.59 + b*0.11;
+                let v;
+                if(grey>255/2){
+                    v = 255;
+                }else{
+                    v= 0;
+                }
+                pixelData[4*i+0] = v;
+                pixelData[4*i+1] = v;
+                pixelData[4*i+2] = v;
             }
             contextb.putImageData(imageData,0,0,0,0,canvasb.width,canvasb.height);
         }

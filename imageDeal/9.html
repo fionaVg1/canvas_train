@@ -39,11 +39,14 @@
             let imageData = contexta.getImageData(0,0,canvasa.width,canvasa.height);
             //图形像素进行操作
             let pixelData = imageData.data;
-            //像素级的操作将图形变为黑色
+            //像素级的操作将图形变为反色滤镜
             for(let i=0;i<canvasb.width*canvasb.height;i++){
-                pixelData[4*i+0] = 0;
-                pixelData[4*i+1] = 0;
-                pixelData[4*i+2] = 0;
+                let r = pixelData[4*i+0];
+                let g = pixelData[4*i+1];
+                let b = pixelData[4*i+2];           
+                pixelData[4*i+0] = 255-r;
+                pixelData[4*i+1] = 255-g;
+                pixelData[4*i+2] = 255-b;
             }
             contextb.putImageData(imageData,0,0,0,0,canvasb.width,canvasb.height);
         }
