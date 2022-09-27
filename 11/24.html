@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      background: #dddddd;
+    }
+    #canvas{
+      margin: 20px;
+      padding: 20px;
+      background: #ffffff;
+      border: thin inset #aaaaaa;     
+    }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <output id="scaleOutput" for="scaleSlider">1.0</output>
+    <input id="scaleSlider" type="range" min="1" max="3" step="0.01" value="1.0"/>
+  </div>
+  <canvas id="canvas"  width="800" height="520">   
+  </canvas>
+  <script src="./24.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>视频处理（HTML代码）</title>
+  <style>
+    body{
+      background: #dddddd;
+    }
+    .floatingControls{
+      position: absolute;
+      left: 175px;
+      top: 300px;
+    }
+    #canvas{
+      margin: 20px;
+      padding: 20px;
+      background: #ffffff;
+      border: thin inset #aaaaaa;     
+    }
+    #video{
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <video id="video" controls src="./audio.mp4"></video>
+  <canvas id="canvas"  width="480" height="270">   
+  </canvas>
+  <div id="controls" class="floatingControls">
+    <input type="button" id="controlButton" value="Play"/>
+    <input type="checkbox" id="colorCheckbox" checked>Color
+    <input type="checkbox" id="flipCheckbox" >Flip
+  </div>
+  <script src="./25.js"></script>
+</body>
+</html>

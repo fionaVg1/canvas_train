@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      background: #eeeeee;
+    }
+    .floatingControls{
+      position: absolute;
+      left: 150px;
+      top: 100px;
+      width: 300px;
+      padding: 20px;
+      border: thin solid rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 200, 0.1);
+      color: blue;
+      font: 14px Arial;
+      box-shadow: rgba(0, 0, 0, 0.2) 6px 6px 8px;
+      display: none;
+    }
+    .floatingControls p{
+      margin-top: 0px;
+      margin-bottom: 20px;
+    }
+    #conrols{
+      position: absolute;
+      left: 25px;
+      top: 25px;
+    }
+    #canvas{ 
+      background: #ffffff;
+      cursor: pointer;
+      margin-left: 10px;
+      margin-top: 10px;
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);      
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"  width="600" height="400"> 
+      
+  </canvas>
+
+  <div id="controls">
+    Stroke color:
+    <select id="strokeStyleSelect">
+      <option value="red">red</option>
+      <option value="green">green</option>
+      <option value="blue">blue</option>
+      <option value="orange">orange</option>
+      <option value="cornflowerblue" selected>cornflowerblue</option>
+      <option value="goldenrod">goldenrod</option>
+      <option value="navy">navy</option>
+      <option value="purple">purple</option>
+    </select>
+    Guidewires:
+    <input id="guidewireCheckbox" type="checkbox" checked/>
+    <input id="eraseAllButton" type="button" value="Erase all"/>
+  </div>
+  <div id="instructions" class="floatingControls">
+    <p>Drag the curve end- and control points to change the shape of the curve</p>
+    <p>When you are donw dragging end- and control points,click outside of the points to finalize the curve</p>
+    <input id="instructionsOkayButton" type="button" value="Okay" autofocus/>
+    <input id="instructionsNoMoreButton" type="button" value="Do not show these instructions again"/>
+  </div>
+  <script type="module" src="./19.js"></script>
+</body>
+</html>
